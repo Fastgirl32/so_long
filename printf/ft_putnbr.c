@@ -1,39 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: secker <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/01 13:18:12 by secker            #+#    #+#             */
-/*   Updated: 2023/01/12 17:03:22 by secker           ###   ########.fr       */
+/*   Created: 2022/10/05 15:05:30 by secker            #+#    #+#             */
+/*   Updated: 2023/01/10 16:28:09 by secker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include <unistd.h>
 
-int	main(void)
+int	ft_putnbr(int n, int i)
 {
-	static char	**s;
-	static char	**temp;
-	int			j;
-	int			i;
+	char	c;
 
-	i = 0;
-	j = 0;
-	s = make_map(s);
-	temp = make_map(temp);
-	j = map_test(temp);
-	while (temp[i])
-		free(temp[i++]);
-	free(temp);
-	i = 0;
-	if (j == 0)
+	if (n == -2147483648)
 	{
-		while (s[i])
-			free(s[i++]);
-		free(s);
-		return (0);
+		write(1, "-2147483648", 11);
+		i += 11;
 	}
-	create_map(s);
+	else if (n < 0)
+	{
+		write(1, "-", 1);
+		i = ft_putnbr(-n, i) + 1;
+	}
+	else if (n > 9)
+	{
+		i = ft_putnbr(n / 10, i);
+		i = ft_putnbr(n % 10, i);
+	}
+	else
+	{
+		c = n + '0';
+		write(1, &c, 1);
+		i++;
+	}
+	return (i);
 }

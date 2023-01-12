@@ -6,7 +6,7 @@
 /*   By: secker <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 10:57:49 by secker            #+#    #+#             */
-/*   Updated: 2022/12/08 16:37:21 by secker           ###   ########.fr       */
+/*   Updated: 2023/01/12 13:33:24 by secker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,5 +114,6 @@ int	wrong_path(char **s)
 	j = loop_path(s, i, k);
 	if (j == 1)
 		return (1);
+	ft_printf("\033[1;31mERROR: There is no valid path!\033[0m\n");
 	return (0);
 }

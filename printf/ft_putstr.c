@@ -1,39 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: secker <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/01 13:18:12 by secker            #+#    #+#             */
-/*   Updated: 2023/01/12 17:03:22 by secker           ###   ########.fr       */
+/*   Created: 2022/10/05 14:10:02 by secker            #+#    #+#             */
+/*   Updated: 2023/01/10 16:28:11 by secker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "ft_printf.h"
+#include <stdlib.h>
+#include <unistd.h>
 
-int	main(void)
+int	ft_putstr3(char *s, int i)
 {
-	static char	**s;
-	static char	**temp;
-	int			j;
-	int			i;
-
-	i = 0;
-	j = 0;
-	s = make_map(s);
-	temp = make_map(temp);
-	j = map_test(temp);
-	while (temp[i])
-		free(temp[i++]);
-	free(temp);
-	i = 0;
-	if (j == 0)
+	if (!s)
 	{
-		while (s[i])
-			free(s[i++]);
-		free(s);
-		return (0);
+		write(1, "(null)", 6);
+		return (i + 6);
 	}
-	create_map(s);
+	while (*s)
+	{
+		write(1, &*s, 1);
+		s++;
+		i++;
+	}
+	return (i);
 }

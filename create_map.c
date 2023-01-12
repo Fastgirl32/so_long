@@ -6,7 +6,7 @@
 /*   By: secker <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:19:16 by secker            #+#    #+#             */
-/*   Updated: 2022/12/08 16:45:01 by secker           ###   ########.fr       */
+/*   Updated: 2023/01/12 16:08:55 by secker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,9 @@ void	paint_map(char **s, t_vars *vars)
 			else if (s[i][k] == 'C')
 				mlx_put_image_to_window(vars->data.mlx, vars->data.mlx_win,
 						vars->img.dia, (k * 48), (i * 48));
+			else if (s[i][k] == 'G')
+					mlx_put_image_to_window(vars->data.mlx, vars->data.mlx_win,
+						vars->img.enemy, (k * 48), (i * 48));
 			else if (s[i][k] == 'P')
 				mlx_put_image_to_window(vars->data.mlx, vars->data.mlx_win,
 						vars->img.player, (k * 48), (i * 48));
@@ -71,24 +74,50 @@ void	paint_map(char **s, t_vars *vars)
 	}
 }
 
+void free_all(t_vars *vars, char **s)
+{
+	int i;
+
+	i = 0;
+	mlx_destroy_image(vars->data.mlx, vars->img.wall);
+	mlx_destroy_image(vars->data.mlx, vars->img.explosion);
+	mlx_destroy_image(vars->data.mlx, vars->img.dia);
+	mlx_destroy_image(vars->data.mlx, vars->img.player);
+	mlx_destroy_image(vars->data.mlx, vars->img.gras);
+	mlx_destroy_image(vars->data.mlx, vars->img.open);
+	mlx_destroy_image(vars->data.mlx, vars->img.closed);
+	mlx_destroy_image(vars->data.mlx, vars->img.enemy);
+	mlx_destroy_window(vars->data.mlx, vars->data.mlx_win);
+	mlx_destroy_display(vars->data.mlx);
+	free(vars->data.mlx);
+	free(vars);
+	while(s[i])
+			free(s[i++]);
+	free(s);
+}
+
 void	create_map(char **s)
 {
 	unsigned int	x;
 	unsigned int	y;
+	int i;
 	t_vars			*vars;
 	// t_vars		actualData;
 	// vars = &actualData;
 
+	i = 0;
 	vars = (t_vars *)malloc(sizeof(t_vars));
 	vars->map = s;
+	vars->k = 1;
+	vars->i = 1;
 	x = window_size_x(s);
 	y = window_size_y(s);
 	vars->data.mlx = mlx_init();
 	vars->data.mlx_win = mlx_new_window(vars->data.mlx, x, y, "so_long");
 	create_images(vars);
-	mlx_hook(vars->data.mlx_win, 2, 1L << 0, input, &vars);
-	mlx_hook(vars->data.mlx_win, 17, 0, input, &vars);
 	paint_map(s, vars);
+	mlx_hook(vars->data.mlx_win, 2, 1L << 0, &input, vars);
+	mlx_hook(vars->data.mlx_win, 17, 0, &close_x, vars);
 	mlx_loop(vars->data.mlx);
-	free(vars);
+	free_all(vars, s);
 }

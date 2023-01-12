@@ -6,7 +6,7 @@
 #    By: secker <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/01 11:59:36 by secker            #+#    #+#              #
-#    Updated: 2022/12/07 17:26:11 by secker           ###   ########.fr        #
+#    Updated: 2023/01/10 16:24:17 by secker           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,26 +23,27 @@ all: $(NAME)
 $(NAME):
 		(cd libft && make)
 		cp libft/libft.a libft.a
+		(cd printf && make)
+		cp printf/libftprintf.a libftprintf.a
 		(cd get_next_line && make)
 		cp get_next_line/get_next_line.a get_next_line.a
-		(cd minilibx-linux && make)
-		cp minilibx-linux/libmlx.a libmlx.a
-		gcc -g $(CFLAGS) -o $(NAME) $(SRC) libft.a get_next_line.a libmlx.a -lXext -lX11
+		cc -g $(CFLAGS) -o $(NAME) $(SRC) libft.a libmlx.a get_next_line.a libftprintf.a -lXext -lX11
 
 play: $(NAME)
 		./$(NAME)
 
 fclean: clean
 	rm -f $(NAME)
-	rm -f libft.a get_next_line.a libmlx.a
+	rm -f libft.a get_next_line.a libftprintf.a
 	(cd libft && make fclean)
+	(cd printf && make fclean)
 	(cd get_next_line && make fclean)
 
 clean:
 	rm -f $(OBJ)
 	(cd libft && make clean)
+	(cd printf && make clean)
 	(cd get_next_line && make clean)
-	(cd minilibx-linux && make clean)
 
 re: fclean all
 

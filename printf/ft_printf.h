@@ -1,39 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: secker <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/01 13:18:12 by secker            #+#    #+#             */
-/*   Updated: 2023/01/12 17:03:22 by secker           ###   ########.fr       */
+/*   Created: 2022/10/26 11:50:33 by secker            #+#    #+#             */
+/*   Updated: 2023/01/10 16:28:02 by secker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-int	main(void)
-{
-	static char	**s;
-	static char	**temp;
-	int			j;
-	int			i;
+# include <stdlib.h>
+# include <unistd.h>
 
-	i = 0;
-	j = 0;
-	s = make_map(s);
-	temp = make_map(temp);
-	j = map_test(temp);
-	while (temp[i])
-		free(temp[i++]);
-	free(temp);
-	i = 0;
-	if (j == 0)
-	{
-		while (s[i])
-			free(s[i++]);
-		free(s);
-		return (0);
-	}
-	create_map(s);
-}
+int	ft_printf(const char *s, ...);
+int	ft_putstr3(char *s, int i);
+int	ft_putchar3(char c, int i);
+int	ft_hexa_low(unsigned int i, int k);
+int	ft_hexa_up(unsigned int i, int k);
+int	ft_putnbr(int n, int i);
+int	ft_putnbr_long(unsigned int n, int i);
+int	ft_pointer(void *s, int i);
+#endif
