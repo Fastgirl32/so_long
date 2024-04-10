@@ -6,13 +6,13 @@
 /*   By: secker <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 13:18:12 by secker            #+#    #+#             */
-/*   Updated: 2023/01/12 17:03:22 by secker           ###   ########.fr       */
+/*   Updated: 2023/01/13 16:13:29 by secker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	static char	**s;
 	static char	**temp;
@@ -21,14 +21,16 @@ int	main(void)
 
 	i = 0;
 	j = 0;
-	s = make_map(s);
-	temp = make_map(temp);
+	if (argv[1] == NULL)
+		argv[1] = "map1.ber";
+	s = make_map(s, argv[1]);
+	temp = make_map(temp, argv[1]);
 	j = map_test(temp);
 	while (temp[i])
 		free(temp[i++]);
 	free(temp);
 	i = 0;
-	if (j == 0)
+	if (j == 0 && argc)
 	{
 		while (s[i])
 			free(s[i++]);

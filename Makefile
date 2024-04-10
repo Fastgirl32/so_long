@@ -6,13 +6,13 @@
 #    By: secker <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/01 11:59:36 by secker            #+#    #+#              #
-#    Updated: 2023/01/10 16:24:17 by secker           ###   ########.fr        #
+#    Updated: 2023/01/13 19:01:10 by secker           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
 
-SRC = make_map.c valid_path.c map_test.c so_long.c create_map.c commands.c create_images.c
+SRC = make_map.c valid_path.c map_test.c so_long.c create_map.c commands.c create_images.c wrong_nubr.c movements.c free_all.c
 
 OBJ = $(SRC:.c=.o)
 

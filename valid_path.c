@@ -6,7 +6,7 @@
 /*   By: secker <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 10:57:49 by secker            #+#    #+#             */
-/*   Updated: 2023/01/12 13:33:24 by secker           ###   ########.fr       */
+/*   Updated: 2023/01/13 16:13:41 by secker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	loop_if(char **s, int i, int k, int j)
 		s[i][k - 1] = 'X';
 		j = loop_path(s, i, k - 1);
 	}
-    return(j);
+	return (j);
 }
 
 int	loop_path(char **s, int i, int k)
